@@ -6,12 +6,16 @@ const {
   GraphQLSchema,
   GraphQLID,
   GraphQLInt,
+  GraphQLList,
 } = graphql;
 
 var books = [
-  { name: "Harry Potter 1", genre: "Fantasy", id: "1" },
-  { name: "Harry Potter 2", genre: "Fantasy", id: "2" },
-  { name: "Harry Potter 3", genre: "Fantasy", id: "3" },
+  { name: "Harry Potter 1", genre: "Fantasy", id: "1", authorid: "1" },
+  { name: "Harry Potter 2", genre: "Fantasy", id: "2", authorid: "2" },
+  { name: "Harry Potter 3", genre: "Fantasy", id: "3", authorid: "3" },
+  { name: "Harry Potter 4", genre: "Fantasy", id: "4", authorid: "2" },
+  { name: "Harry Potter 5", genre: "Fantasy", id: "5", authorid: "3" },
+  { name: "Harry Potter 6", genre: "Fantasy", id: "6", authorid: "3" },
 ];
 
 var authors = [
@@ -26,6 +30,12 @@ const BookType = new GraphQLObjectType({
     id: { type: GraphQLID },
     name: { type: GraphQLString },
     genre: { type: GraphQLString },
+    author: {
+      type: AuthorType,
+      resolve(parent, args) {
+        return _.find(authors, { id: parent.authorid });
+      },
+    },
   }),
 });
 
@@ -35,6 +45,12 @@ const AuthorType = new GraphQLObjectType({
     id: { type: GraphQLID },
     name: { type: GraphQLString },
     age: { type: GraphQLID },
+    books: {
+      type: new GraphQLList(BookType),
+      resolve(parent, args) {
+        return _.filter(books, { authorid: parent.id });
+      },
+    },
   }),
 });
 
