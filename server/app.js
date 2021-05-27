@@ -29,7 +29,7 @@ app.use("/graphql", graphqlHTTP({ schema, graphiql: true }));
 
 //root page information
 app.get("/", function (req, res) {
-  res.send("Use route /graphql to the graphqlHTTP");
+  res.send("Please use the route /graphql to the graphqlHTTP");
 });
 
 //server is listening to port 4000
