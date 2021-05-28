@@ -8,6 +8,7 @@ import {
 // import { onError } from "@apollo/client/link/error";
 
 import BookList from "./components/BookList";
+import AddBook from "./components/AddBook";
 
 // const errorLink = onError(({ graphqlErrors, networkError }) => {
 //   if (graphqlErrors) {
@@ -32,7 +33,11 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <BookList />
+      <div id="main">
+        <h1>My Book List</h1>
+        <BookList />
+        <AddBook />
+      </div>
     </ApolloProvider>
   );
 }

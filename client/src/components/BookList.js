@@ -5,13 +5,15 @@ import { LOAD_BOOKS } from "../GraphQL/Queries";
 function BookList() {
   const { loading, data } = useQuery(LOAD_BOOKS);
   const [books, setBooks] = useState();
+
   useEffect(() => {
     if (data) {
       setBooks(data.books);
     } else {
-      console.log(`error data: ${data}`);
+      // console.log(`error data: ${data}`);
     }
   }, [data]);
+
   if (loading) {
     return <div>Loading books...</div>;
   }
@@ -21,7 +23,7 @@ function BookList() {
         <ul id="book-list">
           {books.map((book) => {
             return (
-              <li key={book.name}>
+              <li key={book.id}>
                 {book.name}---{book.genre}
               </li>
             );
