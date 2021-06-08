@@ -5,7 +5,7 @@ import BookIDContext from "./BookIDContext";
 
 function BookDetails() {
   const selectedbook = useContext(BookIDContext);
-  const { loading, data } = useQuery(BOOK_DETAILS, {
+  const { data } = useQuery(BOOK_DETAILS, {
     variables: { id: selectedbook }, // (id : selectedbook) not (selectedbook)
   });
 
@@ -24,13 +24,9 @@ function BookDetails() {
         setBooks(book.author.books);
       }
     }
-  });
+  }, [data]);
 
-  if (loading) {
-    return <div>Loading Book Details</div>;
-  }
-
-  if (data.book) {
+  if (data && data.book) {
     return (
       <div>
         <h2>{bookname}</h2>
