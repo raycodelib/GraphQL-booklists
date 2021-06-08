@@ -1,10 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, createContext } from "react";
 import { useQuery } from "@apollo/client";
+
 import { LOAD_BOOKS } from "../GraphQL/Queries";
+import BookDetails from "./BookDetails";
+import BookIDContext from "./BookIDContext";
 
 function BookList() {
   const { loading, data } = useQuery(LOAD_BOOKS);
   const [books, setBooks] = useState();
+  const [selectedbook, setSelectedBook] = useState();
 
   useEffect(() => {
     if (data) {
@@ -23,12 +27,20 @@ function BookList() {
         <ul id="book-list">
           {books.map((book) => {
             return (
-              <li key={book.id}>
+              <li
+                key={book.id}
+                onClick={(e) => {
+                  setSelectedBook(book.id);
+                }}
+              >
                 {book.name}---{book.genre}
               </li>
             );
           })}
         </ul>
+        <BookIDContext.Provider value={selectedbook}>
+          <BookDetails />
+        </BookIDContext.Provider>
       </div>
     );
   } else {
