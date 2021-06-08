@@ -33,7 +33,7 @@ function BookList() {
                   setSelectedBook(book.id);
                 }}
               >
-                {book.name}---{book.genre}
+                {book.name}
               </li>
             );
           })}

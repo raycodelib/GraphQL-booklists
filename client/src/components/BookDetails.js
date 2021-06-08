@@ -28,10 +28,11 @@ function BookDetails() {
 
   if (data && data.book) {
     return (
-      <div>
+      <div id="book-details">
         <h2>{bookname}</h2>
         <p>{author}</p>
         <p>{genre}</p>
+        <p>All books by this author:</p>
         <ul className="other-books">
           {books.map((book) => {
             return <li key={book.id}>{book.name}</li>;
@@ -40,7 +41,7 @@ function BookDetails() {
       </div>
     );
   } else {
-    return <div>No book selected</div>;
+    return <div id="book-details">No book selected</div>;
   }
 }
 

@@ -42,7 +42,7 @@ function AddBook() {
   }
   if (authors) {
     return (
-      <form onSubmit={submitForm}>
+      <form id="add-book" onSubmit={submitForm}>
         <div className="field">
           <label>Book name:</label>
           <input
@@ -83,7 +83,7 @@ function AddBook() {
           </select>
         </div>
 
-        <button type="submit">++</button>
+        <button type="submit">+</button>
       </form>
     );
   } else {
