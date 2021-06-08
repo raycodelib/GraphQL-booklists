@@ -12,7 +12,6 @@ function AddBook() {
 
   // const [addBook, { error }] = useMutation(ADD_BOOK);
   const [addBook] = useMutation(ADD_BOOK);
-  // console.log(authors, bookname, genre, authorid);
 
   const submitForm = (e) => {
     if (bookname && genre && authorid) {
@@ -43,7 +42,7 @@ function AddBook() {
   }
   if (authors) {
     return (
-      <form onSubmit={submitForm}>
+      <form id="add-book" onSubmit={submitForm}>
         <div className="field">
           <label>Book name:</label>
           <input
@@ -84,7 +83,7 @@ function AddBook() {
           </select>
         </div>
 
-        <button type="submit">++</button>
+        <button type="submit">+</button>
       </form>
     );
   } else {
