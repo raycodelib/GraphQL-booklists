@@ -2,9 +2,11 @@
 
 **Frontend**: React Hooks, Apollo Client
 
-**Backend**: NodeJS, GraphQL
+**Backend**: NodeJS, GraphQL(Queries&Mutations)
 
 **Database**: MongoDB 
 
-##Demo Effect
-![demo](https://user-images.githubusercontent.com/65437110/121149026-a3d84f80-c885-11eb-9d18-b118b2677a9e.PNG)
+**Demo Picture**:
+
+![demo1](https://user-images.githubusercontent.com/65437110/121150557-fbc38600-c886-11eb-9104-5507bacb9062.PNG)
+![demo2](https://user-images.githubusercontent.com/65437110/121150562-fcf4b300-c886-11eb-8bd7-ee6021a5f809.PNG)
