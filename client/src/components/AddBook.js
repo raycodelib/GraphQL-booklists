@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useQuery, useMutation } from "@apollo/client";
-import { LOAD_AUTHORS } from "../GraphQL/Queries";
+import { LOAD_AUTHORS, LOAD_BOOKS } from "../GraphQL/Queries";
 import { ADD_BOOK } from "../GraphQL/Mutations";
 
 function AddBook() {
@@ -10,29 +10,31 @@ function AddBook() {
   const [genre, setGenre] = useState("");
   const [authorid, setAuthorid] = useState("");
 
-  const [addBook, { error }] = useMutation(ADD_BOOK);
-  console.log(authors, bookname, genre, authorid);
+  // const [addBook, { error }] = useMutation(ADD_BOOK);
+  const [addBook] = useMutation(ADD_BOOK);
+  // console.log(authors, bookname, genre, authorid);
 
-  const addNewBook = () => {
-    addBook({
-      variables: {
-        name: bookname,
-        genre: genre,
-        authorid: authorid,
-      },
-    });
-    console.log("finished addbook");
-    if (error) {
-      console.log("addNewBook error:" + error);
+  const submitForm = (e) => {
+    if (bookname && genre && authorid) {
+      e.preventDefault();
+      addBook({
+        variables: {
+          name: bookname,
+          genre: genre,
+          authorid: authorid,
+        },
+        refetchQueries: [{ query: LOAD_BOOKS }],
+      });
+    } else {
+      alert("Bookname, Genre and Author cannot be empty");
     }
   };
 
   useEffect(() => {
     if (data) {
-      // console.log(data);
       setAuthors(data.authors);
     } else {
-      //   console.log(`error data: ${data}`);
+      // console.log(`error data: ${data}`);
     }
   }, [data]);
 
@@ -41,11 +43,7 @@ function AddBook() {
   }
   if (authors) {
     return (
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-        }}
-      >
+      <form onSubmit={submitForm}>
         <div className="field">
           <label>Book name:</label>
           <input
@@ -86,7 +84,7 @@ function AddBook() {
           </select>
         </div>
 
-        <button onClick={addNewBook}>+</button>
+        <button type="submit">++</button>
       </form>
     );
   } else {
